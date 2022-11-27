@@ -27,10 +27,12 @@ if ( !defined( 'ABSPATH' ) ) {
 
 add_action('plugins_loaded','KTPWP_Index');
 
+
 //ログインしているかどうかを確認
 //ログインしていれば、ログインユーザー情報取得
 global $current_user;
-get_currentuserinfo();
+// get_currentuserinfo();
+
 // $current_user->user_login;
 // $current_user->user_email;
 // $current_user->user_level;
@@ -44,10 +46,10 @@ function KTPWP_Index(){
 
 	//ログイン中なら
 	if( is_user_logged_in() ){
+
 		//仕事リスト
 		function shortcodelist(){
-			return $current_user->user_login . 'さん ようこそ！<br />' . '<a href=/list/>list</a>';
-
+			return  '<a href=/list/>list</a>';
 		}
 		add_shortcode('list','shortcodelist');
 		
@@ -66,7 +68,6 @@ function KTPWP_Index(){
 		//商品・サービス
 		function shortcodeservice(){
 			return '<a href="/service/">service</a>';
-		
 		}
 		add_shortcode('service','shortcodeservice');
 		
@@ -92,12 +93,9 @@ function KTPWP_Index(){
 			return '<p>ログインしています</p>';
 		}
 		add_shortcode('login_er','shortcodelogin_er');
-
+	
+	//ログインしてなければ
 	}else{
-		function shortcodelogin_er(){
-			return '<p>ログインしてください</p>';
-		}
-		add_shortcode('login_er','shortcodelogin_er');
+			echo '<p>ログインしてください</p>';
 	}
-
 }
