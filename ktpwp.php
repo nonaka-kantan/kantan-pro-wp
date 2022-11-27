@@ -49,7 +49,7 @@ function KTPWP_Index(){
 
 		//仕事リスト
 		function shortcodelist(){
-			return  '<a href=/list/>list</a>';
+			return  'ここは仕事リストです。<br /><br /><a href=/list/>list</a>';
 		}
 		add_shortcode('list','shortcodelist');
 		
