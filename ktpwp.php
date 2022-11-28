@@ -21,15 +21,17 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 }
 
 // wp-config.phpが存在しているか？
+
 if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 
+// KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
-
 
 //ログインしているかどうかを確認
 //ログインしていれば、ログインユーザー情報取得
+
 global $current_user;
 // get_currentuserinfo();
 
@@ -41,6 +43,8 @@ global $current_user;
 // $current_user->display_name;
 // $current_user->ID;
 
+// クラスをインクルード
+include 'class/class-tab-control.php';
 
 function KTPWP_Index(){
 
@@ -49,10 +53,11 @@ function KTPWP_Index(){
 
 		//仕事リスト
 		function shortcodelist(){
-			return  'ここは仕事リストです。<br /><br /><a href=/list/>list</a>';
+			$list = new Kntan_Tab_Class();
+			return $list->List_View();;
 		}
 		add_shortcode('list','shortcodelist');
-		
+
 		//受注書
 		function shortcodeorder(){
 			return '<a href="/order/">order</a>';

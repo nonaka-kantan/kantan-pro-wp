@@ -1,11 +1,22 @@
 <?php
-add_action('plugins_loaded','my_ktp_index');
 
-class Kntanlist {
+class Kntan_Tab_Class {
 
-function {
+    // public function __construct() {
+    //     add_action('Action');
+    //     // add_filter('');
+    // }
 
-}
+    public $res;
+
+    public function List_View() {
+        $res = 'ここは仕事リストです。<br /><br /><a href=/list/>list</a>';
+        return $res;
+    }
+
+    // public function filter() {
+
+    // }
 }
 
 ?>
