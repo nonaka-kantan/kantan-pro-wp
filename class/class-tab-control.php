@@ -8,8 +8,11 @@ class Kntan_Tab_Class {
     // }
 
     public function Tab_View( $tab_name ) {
-        $mes = '<h4>ここは ['.$tab_name.'] です。<br /><br /><a href=/'.$tab_name.'/>'.$tab_name.'</a></h4>';
-        return $mes;
+        $content = <<<END
+        <h3>ここは [$tab_name] です。</h3>
+        <p><font size="4">個別ページ → <a href=/$tab_name/ f>$tab_name</a></font></p>
+        END;
+        return $content;
     }
 
     // public function filter() {
