@@ -116,6 +116,60 @@ function KTPWP_Index(){
 	
 	//ログインしてなければ
 	}else{
-			echo '<p>ログインしてください</p>';
+		//仕事リスト
+		function shortcodelist(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'list';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('list','shortcodelist');
+
+		//受注書
+		function shortcodeorder(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'order';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('order','shortcodeorder');
+		
+		//クライアント
+		function shortcodeclient(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'client';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('client','shortcodeclient');
+		
+		//商品・サービス
+		function shortcodeservice(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'service';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('service','shortcodeservice');
+		
+		//協力会社
+		function shortcodesupplier(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'supplier';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('supplier','shortcodesupplier');
+		
+		//レポート
+		function shortcodereport(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'report';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('report','shortcodereport');
+		
+		//設定
+		function shortcodesetting(){
+			$tabs = new Kntan_Tab_Class();
+			$tab_name = 'setting';
+			return $tabs->Tab_Error( $tab_name );
+		}
+		add_shortcode('setting','shortcodesetting');
 	}
 }
