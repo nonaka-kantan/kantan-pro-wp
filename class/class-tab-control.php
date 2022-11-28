@@ -9,8 +9,8 @@ class Kntan_Tab_Class {
 
     public $res;
 
-    public function List_View() {
-        $res = 'ここは仕事リストです。<br /><br /><a href=/list/>list</a>';
+    public function Tab_View( $tab_name ) {
+        $res = '<h4>ここは ['.$tab_name.'] です。<br /><br /><a href=/'.$tab_name.'/>'.$tab_name.'</a></h4>';
         return $res;
     }
 
