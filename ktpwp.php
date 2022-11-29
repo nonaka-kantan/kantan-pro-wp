@@ -21,20 +21,22 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 }
 
 // wp-config.phpが存在しているか？
-
 if ( !defined( 'ABSPATH' ) ) {
-    exit;
+	exit;
 }
+
+// クラスをインクルード
+include 'class/class-tab-control.php';
 
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
 
+
 //ログインしているかどうかを確認
 //ログインしていれば、ログインユーザー情報取得
-
 global $current_user;
-// get_currentuserinfo();
 
+// get_currentuserinfo();
 // $current_user->user_login;
 // $current_user->user_email;
 // $current_user->user_level;
@@ -43,8 +45,6 @@ global $current_user;
 // $current_user->display_name;
 // $current_user->ID;
 
-// クラスをインクルード
-include 'class/class-tab-control.php';
 
 function KTPWP_Index(){
 
