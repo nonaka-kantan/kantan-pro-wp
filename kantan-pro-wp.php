@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: Kantan Pro WP
+Plugin Name: kantan pro wp
 Description: カンタンProWP
 Version: 1.0
 */
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-/**
- * 必要な定数を定義しておく
- */
+/*
+ 必要な定数を定義
+*/
  if ( ! defined( 'MY_PLUGIN_VERSION' ) ) {
 	define( 'MY_PLUGIN_VERSION', '1.0' );
 }
@@ -21,12 +21,12 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 }
 
 // wp-config.phpが存在しているか？
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 // クラスをインクルード
-include 'class/class-tab-control.php';
+include 'includes/class-tab-control.php.php';
 
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
