@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // クラスをインクルード
-include 'includes/class-tab-control.php.php';
+include 'includes/class-tab-control.php';
 
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
@@ -35,16 +35,6 @@ add_action('plugins_loaded','KTPWP_Index');
 //ログインしているかどうかを確認
 //ログインしていれば、ログインユーザー情報取得
 global $current_user;
-
-// get_currentuserinfo();
-// $current_user->user_login;
-// $current_user->user_email;
-// $current_user->user_level;
-// $current_user->user_firstname;
-// $current_user->user_lastname;
-// $current_user->display_name;
-// $current_user->ID;
-
 
 function KTPWP_Index(){
 
