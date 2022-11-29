@@ -12,21 +12,21 @@ class Kntan_Tab_Class {
     // ログインしている場合
     function Tab_View( $tab_name ) {
 
-        // ログアウトのリンク
-        $link = wp_logout_url();
-
         // ログインユーザー情報を取得
         global $current_user;
-        $user = $current_user->nickname;
+        $login_user = $current_user->nickname;
+
+        // ログアウトのリンク
+        $logout_link = wp_logout_url();
 
         // 表示する内容
         $content = <<<END
         <h3>ここは [$tab_name] です。</h3>
-        <p><font size="4">$user さんこんにちは。ログインありがとうございます！<br />
+        <p><font size="4">$login_user さんこんにちは。ログインありがとうございます！<br />
         ここに<a href="/$tab_name">$tab_name</a>の処理が入ります。</font></p>
 
-        <!--ログイン-->
-        <p><font size="4"><a href="$link">ログアウト</a></font></p>
+        <!--ログアウト-->
+        <p><font size="4"><a href="$logout_link">ログアウト</a></font></p>
         END;
         return $content;
     }
@@ -35,14 +35,14 @@ class Kntan_Tab_Class {
     function Tab_Error( $tab_name ) {
 
         // ログインのリンク
-        $link = wp_login_url(); 
+        $login_link = wp_login_url(); 
 
         // 表示する内容
         $content = <<<END
         <h3>ログインしてください</h3>
 
-        <!--ログアウト-->
-        <p><font size="4"><a href="$link">ログイン</a></font></p>
+        <!--ログイン-->
+        <p><font size="4"><a href="$login_link">ログイン</a></font></p>
         END;
         return $content;
     }
