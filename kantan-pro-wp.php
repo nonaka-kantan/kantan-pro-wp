@@ -96,13 +96,6 @@ function KTPWP_Index(){
 			return $tabs->Tab_View( $tab_name );
 		}
 		add_shortcode('setting','shortcodesetting');
-
-		// function shortcodelogin_er(){
-		// 	$tabs = new Kntan_Tab_Class();
-		// 	$tab_name = 'login_er';
-		// 	return $tabs->Tab_View( $tab_name );
-		// }
-		// add_shortcode('login_er','shortcodelogin_er');
 	
 	//ログインしてなければ
 	}else{
