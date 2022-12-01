@@ -31,11 +31,6 @@ include 'includes/class-tab-control.php';
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
 
-
-//ログインしているかどうかを確認
-//ログインしていれば、ログインユーザー情報取得
-global $current_user;
-
 function KTPWP_Index(){
 
 	//ログイン中なら
@@ -44,56 +39,49 @@ function KTPWP_Index(){
 		//仕事リスト
 		function shortcodelist(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'list';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'list' );
 		}
 		add_shortcode('list','shortcodelist');
 
 		//受注書
 		function shortcodeorder(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'order';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'order' );
 		}
 		add_shortcode('order','shortcodeorder');
 		
 		//クライアント
 		function shortcodeclient(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'client';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'client' );
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'service';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'service' );
 		}
 		add_shortcode('service','shortcodeservice');
 		
 		//協力会社
 		function shortcodesupplier(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'supplier';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'supplier' );
 		}
 		add_shortcode('supplier','shortcodesupplier');
 		
 		//レポート
 		function shortcodereport(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'report';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'report' );
 		}
 		add_shortcode('report','shortcodereport');
 		
 		//設定
 		function shortcodesetting(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'setting';
-			return $tabs->Tab_View( $tab_name );
+			return $tabs->Tab_View( 'setting' );
 		}
 		add_shortcode('setting','shortcodesetting');
 	
@@ -102,56 +90,49 @@ function KTPWP_Index(){
 		//仕事リスト
 		function shortcodelist(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'list';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'list' );
 		}
 		add_shortcode('list','shortcodelist');
 
 		//受注書
 		function shortcodeorder(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'order';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'order' );
 		}
 		add_shortcode('order','shortcodeorder');
 		
 		//クライアント
 		function shortcodeclient(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'client';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'client' );
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'service';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'service' );
 		}
 		add_shortcode('service','shortcodeservice');
 		
 		//協力会社
 		function shortcodesupplier(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'supplier';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'supplier' );
 		}
 		add_shortcode('supplier','shortcodesupplier');
 		
 		//レポート
 		function shortcodereport(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'report';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'report' );
 		}
 		add_shortcode('report','shortcodereport');
 		
 		//設定
 		function shortcodesetting(){
 			$tabs = new Kntan_Tab_Class();
-			$tab_name = 'setting';
-			return $tabs->Tab_Error( $tab_name );
+			return $tabs->Tab_Error( 'setting' );
 		}
 		add_shortcode('setting','shortcodesetting');
 	}

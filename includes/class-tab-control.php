@@ -2,15 +2,16 @@
 
 class Kntan_Tab_Class {
 
-    // public function __construct() {
-    //     add_action('Action');
-    //     add_filter('');
-    // }
+    public $name;
 
-    // public $property;
+    public function __construct() {
+        $this->$name;
+        // add_action('');
+        // add_filter('');
+    }
     
     // ログインしている場合
-    function Tab_View( $tab_name ) {
+    function Tab_View( $name ) {
 
         // ログインユーザー情報を取得
         global $current_user;
@@ -21,9 +22,9 @@ class Kntan_Tab_Class {
 
         // 表示する内容
         $content = <<<END
-        <h3>ここは [$tab_name] です。</h3>
+        <h3>ここは [$name] です。</h3>
         <p><font size="4">$login_user さんこんにちは。ログインありがとうございます！<br />
-        ここに<a href="/$tab_name">$tab_name</a>の処理が入ります。</font></p>
+        ここに<a href="/$name">$name</a>の処理が入ります。</font></p>
 
         <!--ログアウト-->
         <p><font size="4"><a href="$logout_link">ログアウト</a></font></p>
