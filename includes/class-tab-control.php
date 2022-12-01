@@ -33,7 +33,7 @@ class Kntan_Tab_Class {
     }
 
     // ログインしていない場合
-    function Tab_Error( $tab_name ) {
+    function Tab_Error() {
 
         // ログインのリンク
         $login_link = wp_login_url(); 
