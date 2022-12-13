@@ -1,6 +1,6 @@
 <?php
 
-class Kntan_Tab_Error_Class {
+class Kantan_Login_Error{
 
     public $name;
 
@@ -11,7 +11,7 @@ class Kntan_Tab_Error_Class {
     }
     
     // ログインしていない場合
-    function Tab_Error() {
+    function Error_View() {
 
         // ログインのリンク
         $login_link = wp_login_url(); 

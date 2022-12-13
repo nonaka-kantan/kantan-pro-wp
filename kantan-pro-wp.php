@@ -28,7 +28,7 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 add_action('plugins_loaded','KTPWP_Index');
 
 // ログインエラークラス
-include 'includes/class-tab-errer.php';
+include 'includes/class-login-errer.php';
 
 function KTPWP_Index(){
 
@@ -91,54 +91,62 @@ function KTPWP_Index(){
 		}
 		add_shortcode('setting','shortcodesetting');
 	
-	//ログインしてなければ
+	//ログアウト中なら
 	}else{
+
 		//仕事リスト
 		function shortcodelist(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'list' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('list','shortcodelist');
 
 		//受注書
 		function shortcodeorder(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'order' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('order','shortcodeorder');
 		
 		//クライアント
 		function shortcodeclient(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'client' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'service' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('service','shortcodeservice');
 		
 		//協力会社
 		function shortcodesupplier(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'supplier' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('supplier','shortcodesupplier');
 		
 		//レポート
 		function shortcodereport(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'report' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('report','shortcodereport');
 		
 		//設定
 		function shortcodesetting(){
-			$tabs = new Kntan_Tab_Error_Class();
-			return $tabs->Tab_Error( 'setting' );
+			$login_error = new Kantan_Login_Error();
+			$error = $login_error->Error_View();
+			return $error;
 		}
 		add_shortcode('setting','shortcodesetting');
 	}
