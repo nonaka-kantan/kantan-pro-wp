@@ -28,7 +28,7 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 add_action('plugins_loaded','KTPWP_Index');
 
 // ログインエラークラス
-include 'includes/class-login-errer.php';
+include 'includes/class-login-error.php';
 
 function KTPWP_Index(){
 
