@@ -1,6 +1,6 @@
 <?php
 
-class Kntan_Tab_Class {
+class Kntan_Report_Class {
 
     public $name;
 
@@ -10,8 +10,7 @@ class Kntan_Tab_Class {
         // add_filter('');
     }
     
-    // ログインしている場合
-    function Tab_View( $name ) {
+    function Report_Tab_View( $name ) {
 
         // ログインユーザー情報を取得
         global $current_user;
@@ -32,21 +31,21 @@ class Kntan_Tab_Class {
         return $content;
     }
 
-    // ログインしていない場合
-    function Tab_Error() {
+    // // ログインしていない場合
+    // function Tab_Error() {
 
-        // ログインのリンク
-        $login_link = wp_login_url(); 
+    //     // ログインのリンク
+    //     $login_link = wp_login_url(); 
 
-        // 表示する内容
-        $content = <<<END
-        <h3>ログインしてください</h3>
+    //     // 表示する内容
+    //     $content = <<<END
+    //     <h3>ログインしてください</h3>
 
-        <!--ログイン-->
-        <p><font size="4"><a href="$login_link">ログイン</a></font></p>
-        END;
-        return $content;
-    }
+    //     <!--ログイン-->
+    //     <p><font size="4"><a href="$login_link">ログイン</a></font></p>
+    //     END;
+    //     return $content;
+    // }
     // function filter() {
 
     // }

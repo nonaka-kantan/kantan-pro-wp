@@ -24,11 +24,11 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 	define( 'MY_PLUGIN_URL', plugins_url( '/', __FILE__ ) );
 }
 
-// クラスをインクルード
-include 'includes/class-tab-control.php';
-
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
+
+// ログインエラークラス
+include 'includes/class-tab-errer.php';
 
 function KTPWP_Index(){
 
@@ -36,51 +36,58 @@ function KTPWP_Index(){
 	if( is_user_logged_in() ){
 
 		//仕事リスト
-		function shortcodelist(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'list' );
+		function TabList(){
+			include 'includes/class-tab-list.php';
+			$list = new Kantan_List_Class();
+			return $list->List_Tab_View( 'list' );
 		}
-		add_shortcode('list','shortcodelist');
+		add_shortcode('list','TabList');
 
 		//受注書
 		function shortcodeorder(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'order' );
+			include 'includes/class-tab-order.php';
+			$tabs = new Kntan_Order_Class();
+			return $tabs->Order_Tab_View( 'order' );
 		}
 		add_shortcode('order','shortcodeorder');
 		
 		//クライアント
 		function shortcodeclient(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'client' );
+			include 'includes/class-tab-client.php';
+			$tabs = new Kntan_Client_Class();
+			return $tabs->Client_Tab_View( 'client' );
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'service' );
+			include 'includes/class-tab-service.php';
+			$tabs = new Kntan_Service_Class();
+			return $tabs->Service_Tab_View( 'service' );
 		}
 		add_shortcode('service','shortcodeservice');
 		
 		//協力会社
 		function shortcodesupplier(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'supplier' );
+			include 'includes/class-tab-supplier.php';
+			$tabs = new Kantan_Supplier_Class();
+			return $tabs->Supplier_Tab_View( 'supplier' );
 		}
 		add_shortcode('supplier','shortcodesupplier');
 		
 		//レポート
 		function shortcodereport(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'report' );
+			include 'includes/class-tab-report.php';
+			$tabs = new Kntan_Report_Class();
+			return $tabs->Report_Tab_View( 'report' );
 		}
 		add_shortcode('report','shortcodereport');
 		
 		//設定
 		function shortcodesetting(){
-			$tabs = new Kntan_Tab_Class();
-			return $tabs->Tab_View( 'setting' );
+			include 'includes/class-tab-setting.php';
+			$tabs = new Kntan_Setting_Class();
+			return $tabs->Setting_Tab_View( 'setting' );
 		}
 		add_shortcode('setting','shortcodesetting');
 	
@@ -88,49 +95,49 @@ function KTPWP_Index(){
 	}else{
 		//仕事リスト
 		function shortcodelist(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'list' );
 		}
 		add_shortcode('list','shortcodelist');
 
 		//受注書
 		function shortcodeorder(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'order' );
 		}
 		add_shortcode('order','shortcodeorder');
 		
 		//クライアント
 		function shortcodeclient(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'client' );
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'service' );
 		}
 		add_shortcode('service','shortcodeservice');
 		
 		//協力会社
 		function shortcodesupplier(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'supplier' );
 		}
 		add_shortcode('supplier','shortcodesupplier');
 		
 		//レポート
 		function shortcodereport(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'report' );
 		}
 		add_shortcode('report','shortcodereport');
 		
 		//設定
 		function shortcodesetting(){
-			$tabs = new Kntan_Tab_Class();
+			$tabs = new Kntan_Tab_Error_Class();
 			return $tabs->Tab_Error( 'setting' );
 		}
 		add_shortcode('setting','shortcodesetting');
