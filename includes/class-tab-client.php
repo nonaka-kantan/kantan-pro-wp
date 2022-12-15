@@ -14,16 +14,12 @@ class Kntan_Client_Class{
         // add_filter('');
     }
     
-    // // テーブル作成用の関数を登録
-    // register_activation_hook(__FILE__, 'Client_Tab_DB');
-
     // クライアントテーブル作成
     function Client_Tab_DB(){
 
         global $wpdb;
         $table_name = $wpdb->prefix. 'ktpwp_clienttable';
         if ($wpdb->get_var("show tables like '$table_name'") != $table_name || get_option('my_plugin_table_version') !== 'MY_PLUGIN_TABLE_VERSION') {
-        // if ($wpdb->get_var("show tables like '$table_name'") != $table_name) {
             $sql = "CREATE TABLE " . $table_name . " (
                 id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
                 time BIGINT(11) DEFAULT '0' NOT NULL,
@@ -37,11 +33,13 @@ class Kntan_Client_Class{
             dbDelta($sql);
             update_option('my_plugin_table_version', 'MY_PLUGIN_TABLE_VERSION');
         }
+
     }
     
     // ログインしている場合に表示するメッセージ
     function Client_Tab_View( $name ) {
 
+        global $wpdb;
 
         // ログインユーザー情報を取得
         global $current_user;
@@ -50,18 +48,21 @@ class Kntan_Client_Class{
         // ログアウトのリンク
         $logout_link = wp_logout_url();
         
+        // 最後のクエリー
+        $last_q = $wpdb->last_query;
+        $last_q = $wpdb->last_result;
 
         // 表示する内容
         $content = <<<END
         <h3>ここは [$name] です。New!</h3>
         <p><font size="4">$login_user さんこんにちは。ログインありがとうございます！<br />
-        ここに<a href="/$name">$name</a>の処理が入ります。</font></p>
+        ここに<a href="/$name">$name</a>の処理が入ります。-- $last_q</font></p>
 
         <!--ログアウト-->
         <p><font size="4"><a href="$logout_link">ログアウト</a></font></p>
         END;
 
-        $content = $content . $table_name;
+        $content = $content;
         return $content;
     }
 
