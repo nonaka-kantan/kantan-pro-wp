@@ -2,7 +2,7 @@
 /*
 Plugin Name: kantan pro wp
 Description: カンタンProWP
-Version: 1.0
+Version: 1.2
 */
 
 // wp-config.phpが存在しているか？
@@ -27,8 +27,11 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 // KTPWP_Indexをロード
 add_action('plugins_loaded','KTPWP_Index');
 
-// ログインエラークラス
+// ログインエラークラスをインクルード
 include 'includes/class-login-error.php';
+
+// テーブル作成用の関数を登録
+register_activation_hook(__FILE__, 'Client_Tab_DB');
 
 function KTPWP_Index(){
 
@@ -55,6 +58,7 @@ function KTPWP_Index(){
 		function shortcodeclient(){
 			include 'includes/class-tab-client.php';
 			$tabs = new Kntan_Client_Class();
+			$tabs->Client_Tab_DB();
 			return $tabs->Client_Tab_View( 'client' );
 		}
 		add_shortcode('client','shortcodeclient');
