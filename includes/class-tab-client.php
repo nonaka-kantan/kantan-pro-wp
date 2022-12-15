@@ -39,16 +39,22 @@ class Kntan_Client_Class{
             ) $charset_collate;";
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
 
+            // テーブル更新実行
+            dbDelta($sql);
+            
+            // wp_optionsにテーブルバージョンを登録する
             add_option( 'my_client_table_version', $my_client_table_version );
+
+            // wp_optionsにテーブルバージョンをアップデートする
             update_option( 'my_client_table_version', $my_client_table_version );
         }
     
     
     }
     
-    // テーブルに初期データを挿入する
+    // テーブルに初期データを挿入する（現時点で毎回実行される）
+    // フォームから値を受信した場合にのみ実行する必要がある
     function Client_Table_Data() {
         global $wpdb;
         
@@ -82,6 +88,9 @@ class Kntan_Client_Class{
         // 最後のクエリー
         $last_q = $wpdb->last_query;
         $last_q = $wpdb->last_result;
+
+        // テーブルデータを表示する
+
 
         // 表示する内容
         $content = <<<END
