@@ -1,7 +1,5 @@
 <?php
 
-// 2022/12/14　バグ中
-
 class Kntan_Client_Class{
 
     public $name;
@@ -14,30 +12,63 @@ class Kntan_Client_Class{
         // add_filter('');
     }
     
+    
     // クライアントテーブル作成
-    function Client_Tab_DB(){
-
+    function Client_Table_Create(){
+        
+        // テーブルのバージョン管理
         global $wpdb;
-        $table_name = $wpdb->prefix. 'ktpwp_clienttable';
-        if ($wpdb->get_var("show tables like '$table_name'") != $table_name || get_option('my_plugin_table_version') !== 'MY_PLUGIN_TABLE_VERSION') {
+        global $my_client_table_version;
+        $my_client_table_version = '0.0'; // 更新する場合はバージョンを変更
+
+        // テーブル名を設定
+        $table_name = $wpdb->prefix. 'ktpwp_client';
+
+        // 文字コードを設定
+        $charset_collate = $wpdb->get_charset_collate();
+
+        // テーブル名またはテーブルバージョンを変更した場合にdbDelta($sql)が実行される
+        if ($wpdb->get_var("show tables like '$table_name'") != $table_name || get_option('my_client_table_version') !== $my_client_table_version) {
             $sql = "CREATE TABLE " . $table_name . " (
                 id MEDIUMINT(9) NOT NULL AUTO_INCREMENT,
                 time BIGINT(11) DEFAULT '0' NOT NULL,
-                nama TINYTEXT NOT NULL,
+                name TINYTEXT NOT NULL,
                 text TEXT NOT NULL,
                 url VARCHAR(55) NOT NULL,
                 UNIQUE KEY id (id)
-            );";
+            ) $charset_collate;";
 
             require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
             dbDelta($sql);
-            update_option('my_plugin_table_version', 'MY_PLUGIN_TABLE_VERSION');
-        }
 
+            add_option( 'my_client_table_version', $my_client_table_version );
+            update_option( 'my_client_table_version', $my_client_table_version );
+        }
+    
+    
     }
     
-    // ログインしている場合に表示するメッセージ
-    function Client_Tab_View( $name ) {
+    // テーブルに初期データを挿入する
+    function Client_Table_Data() {
+        global $wpdb;
+        
+        $welcome_name = 'Mr. WordPress';
+        $welcome_text = 'Congratulations, you just completed the installation!';
+        
+        $table_name = $wpdb->prefix. 'ktpwp_client';
+        
+        $wpdb->insert( 
+            $table_name, 
+            array( 
+                'time' => current_time( 'mysql' ), 
+                'name' => $welcome_name, 
+                'text' => $welcome_text, 
+            ) 
+        );
+    }
+
+    // 表示するメッセージ
+    function Client_Table_View( $name ) {
 
         global $wpdb;
 
