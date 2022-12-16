@@ -65,22 +65,6 @@ function KTPWP_Index(){
 		
 		//クライアント
 		function shortcodeclient(){
-
-			// // 入力フォーム
-			// $form_action = '/client';
-			// $client_form = <<<END
-			// <form method="post" action="$form_action">
-			// 名前：<input type="text" name="client_name">
-			// テキスト：<input type="text" name="text">
-			// <input type="submit" value="送信">
-			// </form>
-			// END;
-
-			// // フォームからのクエリー
-			// if(isset($_POST)){   
-			// 	$name = $_POST['client_name'];
-			// 	$text = $_POST['text'];
-			// }
 			
 			$tabs = new Kntan_Client_Class();
 			$tabs->Client_Table_Create();

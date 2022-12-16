@@ -60,14 +60,14 @@ class Kntan_Client_Class{
         // $welcome_name = 'Mr. WordPress';
         // $welcome_text = 'Congratulations, you just completed the installation!';
 
-        // フォームからのクエリー
+        // フォームからのクエリーを受信する
         if(isset($_POST)){   
             $client_name = $_POST['client_name'];
             $text = $_POST['text'];
         }
-        
+    
+        // 受信したクエリーをテーブルに挿入する
         $table_name = $wpdb->prefix. 'ktpwp_client';
-        
         $wpdb->insert( 
             $table_name, 
             array( 
@@ -109,12 +109,13 @@ class Kntan_Client_Class{
         $result = implode( $results );
 
         // 入力フォーム
-        $form_action = '/client';
+        $form_action = '/' . $name;
         $client_form = <<<END
+        <h3>■ 顧客を登録</h3>
         <form method="post" action="$form_action">
-        名前：<input type="text" name="client_name">
-        テキスト：<input type="text" name="text">
-        <input type="submit" value="送信">
+        <label> 名前：</label> <input type="text" name="client_name">
+        <label> テキスト：</label> <input type="text" name="text">
+        <p><input type="submit" value="送信"></p>
         </form>
         END;
 
