@@ -18,7 +18,7 @@ class Kntan_Client_Class{
         // テーブルのバージョン管理
         global $wpdb;
         global $my_client_table_version;
-        $my_client_table_version = '0.0'; // 更新する場合はバージョンを変更
+        $my_client_table_version = '1.0.1'; // 更新する場合はバージョンを変更
 
         // テーブル名を設定
         $table_name = $wpdb->prefix. 'ktpwp_client';
@@ -57,22 +57,28 @@ class Kntan_Client_Class{
     function Client_Table_Data() {
         global $wpdb;
         
-        $welcome_name = 'Mr. WordPress';
-        $welcome_text = 'Congratulations, you just completed the installation!';
+        // $welcome_name = 'Mr. WordPress';
+        // $welcome_text = 'Congratulations, you just completed the installation!';
+
+        // フォームからのクエリー
+        if(isset($_POST)){   
+            $client_name = $_POST['client_name'];
+            $text = $_POST['text'];
+        }
         
         $table_name = $wpdb->prefix. 'ktpwp_client';
         
         $wpdb->insert( 
             $table_name, 
             array( 
-                'time' => current_time( 'mysql' ), 
-                'name' => $welcome_name, 
-                'text' => $welcome_text, 
+                'time' => current_time( 'mysql' ),
+                'name' => $client_name,
+                'text' => $text,
             ) 
         );
     }
 
-    // 表示するメッセージ
+    // 表示する
     function Client_Table_View( $name ) {
 
         global $wpdb;
@@ -84,27 +90,49 @@ class Kntan_Client_Class{
         // ログアウトのリンク
         $logout_link = wp_logout_url();
         
-        // 最後のクエリー
-        $last_q = $wpdb->last_query;
-        $last_q = $wpdb->last_result;
 
-        // テーブルデータを表示する
+        // テーブルデータを表示する（ページャー）
+        $query_limit = '20'; //表示範囲
+        $query_num = '0'; //スタート位置
+        $query_range = $query_num . ',' . $query_limit;
 
+        $table_name = $wpdb->prefix . 'ktpwp_client';
+        $query = "SELECT * FROM {$table_name} ORDER BY `id` ASC LIMIT $query_range";
+        $post_row = $wpdb->get_results($query);
+        $results[] = "<h3>■ 顧客リスト($query_range)</h3>";
+        foreach ($post_row as $row){
+            $time = esc_html($row->time);
+            $client_name = esc_html($row->name);
+            $text = esc_html($row->text);
+            $results[] = "<p>$time : $client_name : $text<hr></p>";
+        }
+        $result = implode( $results );
 
-        // 表示する内容
+        // 入力フォーム
+        $form_action = '/client';
+        $client_form = <<<END
+        <form method="post" action="$form_action">
+        名前：<input type="text" name="client_name">
+        テキスト：<input type="text" name="text">
+        <input type="submit" value="送信">
+        </form>
+        END;
+
+        // 表示するメッセージ
         $content = <<<END
         <h3>ここは [$name] です。New!</h3>
         <p><font size="4">$login_user さんこんにちは。ログインありがとうございます！<br />
-        ここに<a href="/$name">$name</a>の処理が入ります。-- $last_q</font></p>
+        ここに<a href="/$name">$name</a>の処理が入ります。</font></p>
 
         <!--ログアウト-->
         <p><font size="4"><a href="$logout_link">ログアウト</a></font></p>
         END;
 
-        $content = $content;
+        $content = $content . $client_form . $result;
         return $content;
     }
 
+    
 }
 
 ?>

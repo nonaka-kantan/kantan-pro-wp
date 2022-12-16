@@ -24,20 +24,25 @@ if ( ! defined( 'MY_PLUGIN_URL' ) ) {
 	define( 'MY_PLUGIN_URL', plugins_url( '/', __FILE__ ) );
 }
 
-// KTPWP_Indexをロード
-add_action('plugins_loaded','KTPWP_Index');
+// ファイルをインクルード
+include 'includes/class-tab-list.php';
+include 'includes/class-tab-order.php';
+include 'includes/class-tab-client.php';
+include 'includes/class-tab-service.php';
+include 'includes/class-tab-supplier.php';
+include 'includes/class-tab-report.php';
+include 'includes/class-tab-setting.php';
+include 'includes/class-login-error.php'; // ログインエラークラス
+include 'includes/class-form-client.php'; // クライアントフォームクラス
 
-// ログインエラークラスをインクルード
-include 'includes/class-login-error.php';
+// 関数をロード
+add_action('plugins_loaded','KTPWP_Index'); // カンタンPro本体
+add_action('wpcf7_mail_sent', 'my_wpcf7_mail_sent'); //ContactForm７から送信された情報を取得
+add_action('kpw_client_form', 'kpw_client_form'); //ContactForm７のフォームを生成
 
-// // クライアントテーブルのバージョン
-// if ( ! defined( 'my_client_table_version' ) ) {
-// 	define( 'my_client_table_version', '1.0' );
-// }
-
-// テーブル作成用の関数を登録
-register_activation_hook( __FILE__, 'Client_Table_Create' );
-register_activation_hook( __FILE__, 'Client_Table_Data' );
+// テーブル用の関数を登録
+register_activation_hook( __FILE__, 'Client_Table_Create' ); // テーブル作成用
+register_activation_hook( __FILE__, 'Client_Table_Data' ); // データー用
 
 function KTPWP_Index(){
 
@@ -46,7 +51,6 @@ function KTPWP_Index(){
 
 		//仕事リスト
 		function TabList(){
-			include 'includes/class-tab-list.php';
 			$list = new Kantan_List_Class();
 			return $list->List_Tab_View( 'list' );
 		}
@@ -54,7 +58,6 @@ function KTPWP_Index(){
 
 		//受注書
 		function shortcodeorder(){
-			include 'includes/class-tab-order.php';
 			$tabs = new Kntan_Order_Class();
 			return $tabs->Order_Tab_View( 'order' );
 		}
@@ -63,18 +66,33 @@ function KTPWP_Index(){
 		//クライアント
 		function shortcodeclient(){
 
-			include 'includes/class-tab-client.php';
+			// // 入力フォーム
+			// $form_action = '/client';
+			// $client_form = <<<END
+			// <form method="post" action="$form_action">
+			// 名前：<input type="text" name="client_name">
+			// テキスト：<input type="text" name="text">
+			// <input type="submit" value="送信">
+			// </form>
+			// END;
+
+			// // フォームからのクエリー
+			// if(isset($_POST)){   
+			// 	$name = $_POST['client_name'];
+			// 	$text = $_POST['text'];
+			// }
+			
 			$tabs = new Kntan_Client_Class();
 			$tabs->Client_Table_Create();
 			$tabs->Client_Table_Data();
-			return $tabs->Client_Table_View( 'client' );
+			$view = $tabs->Client_Table_View( 'client' );
+			return $client_form . $view;
 
 		}
 		add_shortcode('client','shortcodeclient');
 		
 		//商品・サービス
 		function shortcodeservice(){
-			include 'includes/class-tab-service.php';
 			$tabs = new Kntan_Service_Class();
 			return $tabs->Service_Tab_View( 'service' );
 		}
@@ -82,7 +100,6 @@ function KTPWP_Index(){
 		
 		//協力会社
 		function shortcodesupplier(){
-			include 'includes/class-tab-supplier.php';
 			$tabs = new Kantan_Supplier_Class();
 			return $tabs->Supplier_Tab_View( 'supplier' );
 		}
@@ -90,7 +107,6 @@ function KTPWP_Index(){
 		
 		//レポート
 		function shortcodereport(){
-			include 'includes/class-tab-report.php';
 			$tabs = new Kntan_Report_Class();
 			return $tabs->Report_Tab_View( 'report' );
 		}
@@ -98,7 +114,6 @@ function KTPWP_Index(){
 		
 		//設定
 		function shortcodesetting(){
-			include 'includes/class-tab-setting.php';
 			$tabs = new Kntan_Setting_Class();
 			return $tabs->Setting_Tab_View( 'setting' );
 		}
