@@ -12,7 +12,6 @@ class Kntan_Client_Class{
         // add_filter('');
     }
     
-    
     // クライアントテーブル作成
     function Client_Table_Create(){
         
