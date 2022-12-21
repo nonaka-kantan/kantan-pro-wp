@@ -37,8 +37,8 @@ include 'includes/class-form-client.php'; // クライアントフォームク�
 
 // 関数をロード
 add_action('plugins_loaded','KTPWP_Index'); // カンタンPro本体
-add_action('wpcf7_mail_sent', 'my_wpcf7_mail_sent'); //ContactForm７から送信された情報を取得
-add_action('kpw_client_form', 'kpw_client_form'); //ContactForm７のフォームを生成
+// add_action('wpcf7_mail_sent', 'my_wpcf7_mail_sent'); //ContactForm７から送信された情報を取得
+// add_action('kpw_client_form', 'kpw_client_form'); //ContactForm７のフォームを生成
 
 // テーブル用の関数を登録
 register_activation_hook( __FILE__, 'Client_Table_Create' ); // テーブル作成用
