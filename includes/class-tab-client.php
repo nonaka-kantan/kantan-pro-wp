@@ -94,7 +94,7 @@ class Kntan_Client_Class{
         $query_range = $query_num . ',' . $query_limit;
         $table_name = $wpdb->prefix . 'ktpwp_client';
 
-        // クライアントリスト情報を取得
+        // クライアントリスト表示
         $query = $wpdb->prepare("SELECT * FROM {$table_name} ORDER BY `id` ASC LIMIT $query_range");
         $post_row = $wpdb->get_results($query);
         $results[] = "<h3>■ 顧客リスト($query_range)</h3>";
@@ -103,9 +103,12 @@ class Kntan_Client_Class{
             $time = esc_html($row->time);
             $client_name = esc_html($row->name);
             $text = esc_html($row->text);
+            // $results[] = <<<END
+            // <p>$id : $time : $client_name : $text : <a href="?method=post&client_id=$id">詳細</a></p><hr>
+            // END;
             $results[] = <<<END
             <p>$id : $time : $client_name : $text : 
-            <form method="post" action="$form_action">
+            <form method="post" action="">
             <input type="hidden" name="client_id" value="$id">
             <input type="submit" name="send_post" value=" 詳細 ">
             </form></p>
@@ -118,11 +121,10 @@ class Kntan_Client_Class{
         // 任意のIDからクライアント情報を取得
         if(isset( $_POST['client_id'] )){
             $query_id = $_POST['client_id'];
+        } else {
+            $query_id = $wpdb->insert_id;
         }
-        // IDが指定されない場合は最後のクライアントIDを指定
-        else{
-            $query_id = 37;
-        }
+
         $query = $wpdb->prepare("SELECT * FROM {$table_name} ORDER BY `id` = $query_id");
         $post_row = $wpdb->get_results($query);
         foreach ($post_row as $row){
