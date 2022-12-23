@@ -34,6 +34,7 @@ include 'includes/class-tab-report.php';
 include 'includes/class-tab-setting.php';
 include 'includes/class-login-error.php'; // ログインエラークラス
 include 'includes/class-form-client.php'; // クライアントフォームクラス
+require_once "includes/kpw-admin-form.php"; // 管理画面に追加
 
 // 関数をロード
 add_action('plugins_loaded','KTPWP_Index'); // カンタンPro本体
@@ -42,7 +43,8 @@ add_action('plugins_loaded','KTPWP_Index'); // カンタンPro本体
 
 // テーブル用の関数を登録
 register_activation_hook( __FILE__, 'Client_Table_Create' ); // テーブル作成用
-register_activation_hook( __FILE__, 'Client_Table_Data' ); // データー用
+register_activation_hook( __FILE__, 'Client_Table_Data' ); // デフォルト
+register_activation_hook( __FILE__, 'my_wpcf7_mail_sent' ); // コンタクト７
 
 function KTPWP_Index(){
 

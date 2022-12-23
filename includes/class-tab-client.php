@@ -55,26 +55,65 @@ class Kntan_Client_Class{
     function Client_Table_Data() {
         global $wpdb;
         
-        // フォームからのクエリーを受信する
-        if(isset($_POST)){
+        // フォームからのクエリーを受信する（デフォルト）
+        if(isset($_POST['client_name'])){
             $client_name = $_POST['client_name'];
             $text = $_POST['text'];
 
-            // POSTデータをクリア
-            // unset($_POST);
+            // 受信したクエリーをテーブルに挿入する
+            $table_name = $wpdb->prefix. 'ktpwp_client';
+            $wpdb->insert( 
+                $table_name, 
+                array( 
+                    'time' => current_time( 'mysql' ),
+                    'name' => $client_name,
+                    'text' => $text,
+                ) 
+            );
         }
-    
-        // 受信したクエリーをテーブルに挿入する
-        $table_name = $wpdb->prefix. 'ktpwp_client';
-        $wpdb->insert( 
-            $table_name, 
-            array( 
-                'time' => current_time( 'mysql' ),
-                'name' => $client_name,
-                'text' => $text,
-            ) 
-        );
+
+    // if(isset($_POST['your-name'])){
+    //         $client_name = $_POST['your-name'];
+    //         $text = $_POST['your-message'];
+            
+    //         // POSTデータをクリア
+    //         // unset($_POST);
+    //         // 受信したクエリーをテーブルに挿入する
+    //         $table_name = $wpdb->prefix. 'ktpwp_client';
+    //         $wpdb->insert( 
+    //             $table_name, 
+    //             array( 
+    //                 'time' => current_time( 'mysql' ),
+    //                 'name' => $client_name,
+    //                 'text' => $text,
+    //             ) 
+    //         );
+    //     }
     }
+
+    // フォームからのクエリーを受信する（コンタクトフォーム７）
+    function my_wpcf7_mail_sent($contact_form){
+        global $wpdb;
+
+        $submission = new WPCF7_Submission();
+        if($submission) {
+        
+            //フォームデーターを取得
+            $formdata = $submission->get_posted_data();
+            
+            // 受信したクエリーをテーブルに挿入する
+            $table_name = $wpdb->prefix. 'ktpwp_client';
+            $wpdb->insert( 
+                $table_name, 
+                array( 
+                    'time' => current_time( 'mysql' ),
+                    'name' => $formdata['your-name'],
+                    'text' => $formdata['your-message'],
+                ) 
+            );
+        }
+    }
+    
 
     // 表示する
     function Client_Table_View( $name ) {
@@ -170,9 +209,11 @@ class Kntan_Client_Class{
 
         $content = $top_client . $message . $client_form . $client_list;
         return $content;
+
+        // POSTデータをクリア
+        unset($_POST);
     }
 
-    
 }
 
 ?>
